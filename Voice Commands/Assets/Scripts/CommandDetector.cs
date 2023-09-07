@@ -66,12 +66,13 @@ public class CommandDetector : MonoBehaviour
     private void OnHypothesisChange(string text)
     {
         OnHypothesisUpdate.Invoke(text);
-        Debug.LogFormat("Dictation hypothesis: {0}", text);
+        // Debug.LogFormat("Dictation hypothesis: {0}", text);
         string[] tokens = text.ToLowerInvariant().Split(null);
         foreach(string token in tokens)
         {
             if (_commands.Contains(token))
             {
+                Debug.Log($"Command Detected: {token}");
                 OnCommand.Invoke(token);
                 _dictationRecognizer.Stop();
                 return;
